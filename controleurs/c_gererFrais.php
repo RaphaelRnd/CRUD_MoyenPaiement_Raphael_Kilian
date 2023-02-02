@@ -33,17 +33,16 @@ switch($action){
 		$dateFrais = $_REQUEST['dateFrais'];
 		$libelle = $_REQUEST['libelle'];
 		$montant = $_REQUEST['montant'];
-		$paiement = $_REQUEST['libPaiement'];
-		echo $paiement;
-		$pdo->transformePaiement($paiement);
-		$paiementId = $paiementId['id'];
-		echo $paiementId;
+		$idPaiement = $_REQUEST['libPaiement'];
+		
+		echo $idPaiement;
 		valideInfosFrais($dateFrais,$libelle,$montant);
 		if (nbErreurs() != 0 ){
 			include("vues/v_erreurs.php");
 		}
 		else{
-			$pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant,$paiementId['idPaiement']);
+			$pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant,$idPaiement);
+			header('Location: /Crud_Kilian_Raphael-main/index.php?uc=gererFrais');
 		}
 		break;
 	}

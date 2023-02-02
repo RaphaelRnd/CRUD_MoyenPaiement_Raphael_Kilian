@@ -115,8 +115,12 @@ class PdoGsb{
  * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif 
 */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
-	    $req = "select * from LigneFraisHorsForfait where LigneFraisHorsForfait.idVisiteur ='$idVisiteur' 
-		and LigneFraisHorsForfait.mois = '$mois' ";	
+	    $req = "select LigneFraisHorsForfait.id as id, idVisiteur as idVisiteur, mois as mois,
+		LigneFraisHorsForfait.libelle as libelle, date as date, montant as montant,
+		idPaiement as idPaiement, Paiement.libelle as libPaiement
+		 from LigneFraisHorsForfait inner join Paiement on LigneFraisHorsForfait.idPaiement = Paiement.id
+		where LigneFraisHorsForfait.idVisiteur ='$idVisiteur' 
+				and LigneFraisHorsForfait.mois = '$mois' ";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		$nbLignes = count($lesLignes);
@@ -357,13 +361,6 @@ class PdoGsb{
 		$rs = PdoGsb::$monPdo->query($req);
 		$ligne = $rs->fetchAll();
 		return $ligne;
-	}
-	public function transformePaiement($paiement){
-		$req="select * from Paiement where libelle = '$paiement'";
-		$rs = PdoGsb::$monPdo->query($req);
-		$ligne = $rs->fetchAll();
-		return $ligne;
-		echo "ok";
 	}
 }
 ?>
