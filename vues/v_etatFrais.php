@@ -38,7 +38,8 @@
              <tr>
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
-                <th class='montant'>Montant</th>                
+                <th class='montant'>Montant</th>
+                <th class="moyen">Moyen de paiement</th>                
              </tr>
         <?php      
           foreach ( $lesFraisHorsForfait as $unFraisHorsForfait ) 
@@ -46,11 +47,13 @@
 			$date = $unFraisHorsForfait['date'];
 			$libelle = $unFraisHorsForfait['libelle'];
 			$montant = $unFraisHorsForfait['montant'];
+      $libPaiement = $unFraisHorsForfait['libPaiement'];
 		?>
              <tr>
                 <td><?php echo $date ?></td>
                 <td><?php echo $libelle ?></td>
                 <td><?php echo $montant ?></td>
+                <td><?php echo $libPaiement?></td>
              </tr>
         <?php 
           }
