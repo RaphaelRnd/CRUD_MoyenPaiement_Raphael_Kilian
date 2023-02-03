@@ -362,5 +362,9 @@ class PdoGsb{
 		$ligne = $rs->fetchAll();
 		return $ligne;
 	}
+	public function creeMoyen($nouveauMoyen) {
+		$req="insert into Paiement (libelle) VALUES ('$nouveauMoyen')";
+		PdoGsb::$monPdo->exec($req);
+	}
 }
 ?>
